@@ -1,6 +1,8 @@
 package com.greetingapp.controller;
 
 
+import com.greetingapp.services.GreetingServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -30,5 +32,13 @@ public class GreetingController {
     @DeleteMapping
     public Map<String, String> deleteGreeting(@RequestParam(value = "id", required = false) String id) {
         return Map.of("message", "Hello from DELETE", "deletedId", id != null ? id : "none");
+    }
+    @Autowired
+    GreetingServices greeting;
+    @GetMapping("/greeting/Hello")
+    public String greet()
+    {
+        String string= greeting.hello();
+        return string;
     }
 }
